@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpqlhqyadbpvs"]
+
+[ext_resource type="Script" path="res://ServerInfo.gd" id="1_7sw04"]
+
+[node name="ServerInfo" type="HBoxContainer"]
+script = ExtResource("1_7sw04")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "test label"
+
+[node name="Ip" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "192.168.1.111"
+
+[node name="PlayerCount" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

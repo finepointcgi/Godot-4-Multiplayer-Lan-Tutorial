@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwtcufnykv2gk"]
+[gd_scene load_steps=4 format=3 uid="uid://bwtcufnykv2gk"]
 
 [ext_resource type="Script" path="res://MutiplayerController.gd" id="1_omkav"]
+[ext_resource type="Script" path="res://ServerBrowser.gd" id="2_njv3o"]
+[ext_resource type="PackedScene" uid="uid://dpqlhqyadbpvs" path="res://server_info.tscn" id="3_jpahl"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_omkav")
+Address = "127.0.0.1"
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
@@ -50,6 +53,73 @@ offset_right = 122.0
 offset_bottom = 96.0
 text = "Name"
 
+[node name="ServerBrowser" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_njv3o")
+serverInfo = ExtResource("3_jpahl")
+
+[node name="BroadcastTimer" type="Timer" parent="ServerBrowser"]
+
+[node name="Label2" type="Label" parent="ServerBrowser"]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 15.0
+offset_right = 1148.0
+offset_bottom = 67.0
+text = "Bound To 
+Listen Port: "
+
+[node name="Panel" type="Panel" parent="ServerBrowser"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 248.0
+offset_right = 687.0
+offset_bottom = 580.0
+
+[node name="ServerInfo2" type="HBoxContainer" parent="ServerBrowser/Panel"]
+layout_mode = 2
+offset_top = 1.0
+offset_right = 643.0
+offset_bottom = 51.0
+
+[node name="Name" type="Label" parent="ServerBrowser/Panel/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+
+[node name="Ip" type="Label" parent="ServerBrowser/Panel/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "IP"
+
+[node name="PlayerCount" type="Label" parent="ServerBrowser/Panel/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Count"
+
+[node name="PlayerCount2" type="Label" parent="ServerBrowser/Panel/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ServerBrowser/Panel"]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 643.0
+offset_bottom = 329.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 898.0
+offset_top = 104.0
+offset_right = 1123.0
+offset_bottom = 173.0
+text = "test add player (host)"
+
 [connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
 [connection signal="button_down" from="Join" to="." method="_on_join_button_down"]
 [connection signal="button_down" from="StartGame" to="." method="_on_start_game_button_down"]
+[connection signal="timeout" from="ServerBrowser/BroadcastTimer" to="ServerBrowser" method="_on_broadcast_timer_timeout"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
