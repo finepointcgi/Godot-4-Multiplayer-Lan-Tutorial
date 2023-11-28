@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://damr3dtg1b3ag"]
+
+[ext_resource type="Script" path="res://SeverManager.gd" id="1_b8jrc"]
+[ext_resource type="Script" path="res://Client.gd" id="2_f8sb3"]
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_ykjr0"]
+number_color = Color(1, 0, 0, 1)
+symbol_color = Color(0, 1, 0, 1)
+function_color = Color(0, 1, 1, 1)
+member_variable_color = Color(1, 0.713726, 0, 1)
+
+[node name="SeverManager" type="Node"]
+script = ExtResource("1_b8jrc")
+timeoutinSeconds = null
+hostedPort = null
+
+[node name="Client Test" type="Node" parent="."]
+script = ExtResource("2_f8sb3")
+
+[node name="Control" type="Control" parent="Client Test"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Client Test/Control"]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 175.0
+offset_right = 523.0
+offset_bottom = 205.0
+text = "Game Manager Create Peers"
+
+[node name="Button2" type="Button" parent="Client Test/Control"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 211.0
+offset_right = 522.0
+offset_bottom = 241.0
+text = "Get Peers"
+
+[node name="Button3" type="Button" parent="Client Test/Control"]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 246.0
+offset_right = 523.0
+offset_bottom = 276.0
+text = "None"
+
+[node name="Button4" type="Button" parent="Client Test/Control"]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 95.0
+offset_right = 531.0
+offset_bottom = 126.0
+text = "Create Client"
+
+[node name="Button5" type="Button" parent="Client Test/Control"]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 56.0
+offset_right = 523.0
+offset_bottom = 87.0
+text = "Send Peer"
+
+[node name="Label3" type="Label" parent="Client Test"]
+offset_left = 568.0
+offset_top = 55.0
+offset_right = 619.0
+offset_bottom = 81.0
+text = "Name:"
+
+[node name="Label2" type="Label" parent="Client Test"]
+offset_left = 567.0
+offset_top = 136.0
+offset_right = 618.0
+offset_bottom = 162.0
+text = "Name:"
+
+[node name="TextEdit" type="TextEdit" parent="Client Test"]
+offset_left = 656.0
+offset_top = 445.0
+offset_right = 1132.0
+offset_bottom = 606.0
+syntax_highlighter = SubResource("CodeHighlighter_ykjr0")
+
+[node name="LobbyValue" type="TextEdit" parent="Client Test"]
+offset_left = 557.0
+offset_top = 95.0
+offset_right = 909.0
+offset_bottom = 130.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 32.0
+offset_top = 57.0
+offset_right = 132.0
+offset_bottom = 88.0
+text = "Start Server"
+
+[node name="Button5" type="Button" parent="."]
+offset_left = 26.0
+offset_top = 96.0
+offset_right = 219.0
+offset_bottom = 127.0
+text = "Send Test Packet Server"
+
+[connection signal="button_down" from="Client Test/Control/Button" to="Client Test" method="_on_button_button_down"]
+[connection signal="button_down" from="Client Test/Control/Button2" to="Client Test" method="_on_button_2_button_down"]
+[connection signal="button_down" from="Client Test/Control/Button3" to="Client Test" method="_on_button_3_button_down"]
+[connection signal="button_down" from="Client Test/Control/Button4" to="Client Test" method="_on_button_4_button_down"]
+[connection signal="button_down" from="Client Test/Control/Button5" to="Client Test" method="_on_button_5_button_down"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="Button5" to="." method="_on_button_5_button_down"]
