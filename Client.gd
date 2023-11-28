@@ -11,8 +11,8 @@ enum Message {
 	ANSWER,
 	userConnected,
 	lobbyInfo,
-	CheckIn
-
+	CheckIn,
+	matchmake
 }
 var _peer = WebSocketMultiplayerPeer.new()
 var peerid = 0
@@ -30,12 +30,8 @@ func _ready():
 	multiplayer.server_disconnected.connect(self._mp_server_disconnect)
 	multiplayer.peer_connected.connect(self._mp_peer_connected)
 	multiplayer.peer_disconnected.connect(self._mp_peer_disconnected)
-	
-	
 	pass
 	#get_tree().set_multiplayer_authority(_peer.get_unique_id())
-
-
 
 func _process(delta):
 	_peer.poll()
@@ -77,14 +73,11 @@ func _process(delta):
 					printToConsole("####### Connecting Peer " + str(data.id))
 					#_create_peer(data.id)
 					pass
-					
-					
+										
 # connects the users together
 func _connected(id, use_mesh):
 	printToConsole("Connected %d, mesh: %s" % [id, use_mesh])
 	
-
-
 func _on_button_4_button_down():
 	#_peer.create_client("ws://204.48.28.159:8915")
 	_peer.create_client("ws://127.0.0.1:8915")
@@ -95,7 +88,6 @@ func _on_button_4_button_down():
 	
 	#checkInTimer.start(5)
 	pass # Replace with function body.
-
 
 func _on_button_5_button_down():
 	var message = {
@@ -127,6 +119,7 @@ func ping(argument):
 	#get_tree().root.add_child(scene)
 	#$TextEdit.text = $TextEdit.text + "/n" + str(argument)
 	pass
+
 func _on_button_7_button_down():
 	ping.rpc(randf())
 	pass # Replace with function body.
@@ -147,23 +140,31 @@ func _mp_peer_disconnected(id: int):
 	##printToConsole("[Multiplayer] Peer %d disconnected" % id)
 	pass
 
-
-
 func printToConsole(s : String):
 	$TextEdit.text = $TextEdit.text + "\n " + s
 	#print(s)
-
 
 func _on_button_2_button_down():
 	var s = rtc_mp.get_peers()
 	printToConsole(str(rtc_mp.get_peers()))
 	pass # Replace with function body.
 
-
 func _on_button_button_down():
 	
 	pass # Replace with function body.
 
-
 func _on_button_3_button_down():
+	var message = {
+		"id" : peerid,
+		"message" : Message.matchmake,
+		"player" : {
+			"id" : peerid,
+			"elo" : 1
+			
+		}
+	}
+	
+	var message_bytes = JSON.stringify(message).to_utf8_buffer()
+	printToConsole("registering to elo")
+	_peer.put_packet(message_bytes)
 	pass # Replace with function body.

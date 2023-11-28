@@ -28,8 +28,8 @@ var  matchmakeUsers = {
 
 }
 
-@export var timeoutinSeconds = 10
-@export var hostedPort = 8915
+var timeoutinSeconds = 10
+var hostedPort = 8915
 
 func _ready():
 	if "--server" in OS.get_cmdline_args():
@@ -49,7 +49,7 @@ func _process(delta):
 				if float(Time.get_unix_time_from_system() - users[i].lastConnected) > timeoutinSeconds:
 					disconnectUser(i)
 
-		for user in matchmake:
+		for user in matchmakeUsers:
 			pass
 		if _peer.get_available_packet_count() > 0:
 			var packet = _peer.get_packet()
@@ -67,29 +67,35 @@ func _process(delta):
 				if data.message == Message.join:
 					JoinLobby(data.peer, data.lobbyValue)
 					return
-				if data.messge == Message.matchmake:
-
+				if data.message == Message.matchmake:
+					add_player_to_queue(data.player.id, data.player.elo)
 					return
 				if data.message == Message.CheckIn:
 					users[int(data.id)].lastConnected = Time.get_unix_time_from_system()
+		
+		match_players()
 
 func add_player_to_queue(player_id, player_elo):
-	players[player_id] = player_elo
-	match_players()  # Try to match players
+	matchmakeUsers[player_id] = {
+		"id": player_id,
+		"elo": player_elo
+		}
+	
+	#match_players()  # Try to match players
 
 func match_players():
 	# Logic to match players based on ELO rating
 	# For simplicity, this is a basic example
-	for id in players:
-		for opponent_id in players:
+	for id in matchmakeUsers:
+		for opponent_id in matchmakeUsers:
 			if is_eligible_for_match(id, opponent_id):
 				start_match(id, opponent_id)
 				return  # Assuming one match at a time for simplicity
 
 func is_eligible_for_match(id, opponent_id):
 	if id == opponent_id:
-		return False  # Can't match with oneself
-	var elo_difference = abs(players[id] - players[opponent_id])
+		return false  # Can't match with oneself
+	var elo_difference = abs(matchmakeUsers[id] - matchmakeUsers[opponent_id])
 	return elo_difference < 100  # Example threshold
 
 func start_match(id1, id2):

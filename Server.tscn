@@ -11,8 +11,6 @@ member_variable_color = Color(1, 0.713726, 0, 1)
 
 [node name="SeverManager" type="Node"]
 script = ExtResource("1_b8jrc")
-timeoutinSeconds = null
-hostedPort = null
 
 [node name="Client Test" type="Node" parent="."]
 script = ExtResource("2_f8sb3")
@@ -34,18 +32,18 @@ text = "Game Manager Create Peers"
 [node name="Button2" type="Button" parent="Client Test/Control"]
 layout_mode = 0
 offset_left = 422.0
-offset_top = 211.0
+offset_top = 216.0
 offset_right = 522.0
-offset_bottom = 241.0
+offset_bottom = 247.0
 text = "Get Peers"
 
 [node name="Button3" type="Button" parent="Client Test/Control"]
 layout_mode = 0
 offset_left = 423.0
-offset_top = 246.0
+offset_top = 260.0
 offset_right = 523.0
-offset_bottom = 276.0
-text = "None"
+offset_bottom = 291.0
+text = "Register Elo"
 
 [node name="Button4" type="Button" parent="Client Test/Control"]
 layout_mode = 0

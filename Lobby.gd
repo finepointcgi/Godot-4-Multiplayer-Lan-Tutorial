@@ -25,14 +25,14 @@ func _process(delta):
 
 		if lobby_countdown <= 0:
 			start_game()
-		update_lobby_ui(lobby_countdown)
+			update_lobby_ui(lobby_countdown)
 	
-	if lobby_wait_end_time_timer_started and players_in_lobby.size() = maxPlayers:
+	if lobby_wait_end_time_timer_started and players_in_lobby.size() == maxPlayers:
 		lobby_wait_end_time -= delta
 
 		if lobby_wait_end_time <= 0:
 			start_game()
-		update_lobby_ui(lobby_wait_end_time)
+			update_lobby_ui(lobby_wait_end_time)
 
 func add_player_to_lobby(player_id):
 	players[player_id] = {
@@ -52,6 +52,7 @@ func add_player_to_lobby(player_id):
 func start_game():
 	# Logic to start the game with current players in the lobby
 	pass
+	
 func update_lobby_ui(time_left):
 	# Update the lobby UI with the remaining time
 	pass
