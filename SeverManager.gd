@@ -87,11 +87,10 @@ func match_players():
 	# Logic to match players based on ELO rating
 	# For simplicity, this is a basic example
 	for id in matchmakeUsers:
-		for opponent_id in matchmakeUsers:
-			if is_eligible_for_match(id, opponent_id):
-				start_match(id, opponent_id)
-				return  # Assuming one match at a time for simplicity
-
+		for lobby in lobbies:
+			if lobby.IsElegableForMatch(id):
+				lobby.add_player_to_lobby(id)
+		
 func is_eligible_for_match(id, opponent_id):
 	if id == opponent_id:
 		return false  # Can't match with oneself
