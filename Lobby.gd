@@ -34,11 +34,12 @@ func _process(delta):
 			start_game()
 			update_lobby_ui(lobby_wait_end_time)
 
-func add_player_to_lobby(player_id):
-	players[player_id] = {
+func add_player_to_lobby(player):
+	players[player.id] = {
 		"name" : "",
-		"id": player_id,
-		"index": players.size() + 1
+		"id": player.id,
+		"index": players.size() + 1,
+		"elo" : player.elo
 	}
 	
 	if players_in_lobby.size() == minimum_players_to_start and !lobby_timer_started:
@@ -46,8 +47,8 @@ func add_player_to_lobby(player_id):
 
 	if players_in_lobby.size() > 1:
 		lobby_wait_end_time_timer_started = true
-
-	return players[player_id]
+	lobbyElo = (lobbyElo + players[player.id].elo) / 2
+	return players[player.id]
 
 func start_game():
 	# Logic to start the game with current players in the lobby

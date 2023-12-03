@@ -87,10 +87,17 @@ func match_players():
 	# Logic to match players based on ELO rating
 	# For simplicity, this is a basic example
 	for id in matchmakeUsers:
+		var foundMatch = false
 		for lobby in lobbies:
 			if lobby.IsElegableForMatch(id):
 				lobby.add_player_to_lobby(id)
+				foundMatch = true
+				continue
+		if !foundMatch:
+			JoinLobby(users[id], "")
 		
+
+	
 func is_eligible_for_match(id, opponent_id):
 	if id == opponent_id:
 		return false  # Can't match with oneself
@@ -111,7 +118,7 @@ func JoinLobby(peer, id :String):
 		lobbies[id] = Lobby.new(peer)
 		#print(id)
 	
-	var player = lobbies[id].AddPlayer(peer)
+	var player = lobbies[id].add_player_to_lobby(peer)
 	for p in lobbies[id].players:
 		#print("sending new user info to peer")
 		#print(lobbies[id].players[p])
