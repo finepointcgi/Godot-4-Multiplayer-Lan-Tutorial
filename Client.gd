@@ -90,6 +90,7 @@ func _on_button_4_button_down():
 	pass # Replace with function body.
 
 func _on_button_5_button_down():
+	
 	var message = {
 		"peer" : peerid,
 		"message" : Message.join,

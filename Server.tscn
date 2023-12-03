@@ -40,10 +40,10 @@ text = "Get Peers"
 [node name="Button3" type="Button" parent="Client Test/Control"]
 layout_mode = 0
 offset_left = 423.0
-offset_top = 260.0
-offset_right = 523.0
-offset_bottom = 291.0
-text = "Register Elo"
+offset_top = 132.0
+offset_right = 564.0
+offset_bottom = 163.0
+text = "Start MatchMake"
 
 [node name="Button4" type="Button" parent="Client Test/Control"]
 layout_mode = 0
