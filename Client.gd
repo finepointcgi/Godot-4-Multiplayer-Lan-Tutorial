@@ -160,7 +160,7 @@ func _on_button_3_button_down():
 		"message" : Message.matchmake,
 		"player" : {
 			"id" : peerid,
-			"elo" : 1
+			"elo" : int($Control/TextEdit.text)
 			
 		}
 	}

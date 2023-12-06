@@ -49,7 +49,8 @@ func _process(delta):
 				if float(Time.get_unix_time_from_system() - users[i].lastConnected) > timeoutinSeconds:
 					disconnectUser(i)
 
-		for user in matchmakeUsers:
+		for lobby in lobbies:
+			lobbies[lobby].process(delta)
 			pass
 		if _peer.get_available_packet_count() > 0:
 			var packet = _peer.get_packet()
@@ -76,10 +77,14 @@ func _process(delta):
 		match_players()
 
 func add_player_to_queue(player_id, player_elo):
+	print(player_id, player_elo)
 	matchmakeUsers[player_id] = {
 		"id": player_id,
 		"elo": player_elo
 		}
+		
+	if users.has(int(player_id)):
+		users[int(player_id)].elo = player_elo
 	
 	#match_players()  # Try to match players
 
@@ -89,12 +94,17 @@ func match_players():
 	for id in matchmakeUsers:
 		var foundMatch = false
 		for lobby in lobbies:
-			if lobby.IsElegableForMatch(id):
-				lobby.add_player_to_lobby(id)
+			if lobbies[lobby].IsElegableForMatch(users[int(id)]):
+				JoinLobby(users[int(id)], lobby)
 				foundMatch = true
+				matchmakeUsers.erase(id)
 				continue
+
 		if !foundMatch:
-			JoinLobby(users[id], "")
+			for i in users:
+				if users[i].id == id:
+					JoinLobby(users[i], "")
+					matchmakeUsers.erase(id)
 		
 
 	
@@ -115,10 +125,10 @@ func update_elo_ratings(player1_id, player2_id, winner_id):
 func JoinLobby(peer, id :String):
 	if id == "":
 		id = generate_random_string()
-		lobbies[id] = Lobby.new(peer)
+		lobbies[id] = Lobby.new(peer.id)
 		#print(id)
-	
 	var player = lobbies[id].add_player_to_lobby(peer)
+	#JoinLobby(player, id)
 	for p in lobbies[id].players:
 		#print("sending new user info to peer")
 		#print(lobbies[id].players[p])
@@ -133,7 +143,7 @@ func JoinLobby(peer, id :String):
 			"message" : Message.userConnected,
 			"id" : p
 		}
-		sendMessageToPeer(peer, data2)
+		sendMessageToPeer(peer.id, data2)
 		
 		var data3 = {
 			"message" : Message.lobbyInfo,
@@ -153,7 +163,8 @@ func JoinLobby(peer, id :String):
 	}
 	#print(data)
 
-	sendMessageToPeer(peer, data)
+	sendMessageToPeer(peer.id, data)
+
 		
 func generate_random_string():
 	var result = ""
@@ -174,7 +185,8 @@ func peerConnected(id):
 	users[id] = {
 		"id" : id,
 		"inGameId" : 0,
-		"lastConnected" : Time.get_unix_time_from_system()
+		"lastConnected" : Time.get_unix_time_from_system(),
+		"elo" : 100
 	}
 	
 	var data = {
@@ -214,4 +226,9 @@ func _on_button_5_button_down():
 
 
 func _on_button_6_button_down():
+	pass # Replace with function body.
+
+
+func _on_button_2_button_down():
+	db.CreateDB()
 	pass # Replace with function body.

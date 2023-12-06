@@ -23,26 +23,26 @@ offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="Client Test/Control"]
 layout_mode = 0
-offset_left = 423.0
-offset_top = 175.0
-offset_right = 523.0
-offset_bottom = 205.0
+offset_left = 419.0
+offset_top = 271.0
+offset_right = 648.0
+offset_bottom = 302.0
 text = "Game Manager Create Peers"
 
 [node name="Button2" type="Button" parent="Client Test/Control"]
 layout_mode = 0
-offset_left = 422.0
-offset_top = 216.0
-offset_right = 522.0
-offset_bottom = 247.0
+offset_left = 418.0
+offset_top = 312.0
+offset_right = 518.0
+offset_bottom = 343.0
 text = "Get Peers"
 
 [node name="Button3" type="Button" parent="Client Test/Control"]
 layout_mode = 0
-offset_left = 423.0
-offset_top = 132.0
-offset_right = 564.0
-offset_bottom = 163.0
+offset_left = 418.0
+offset_top = 199.0
+offset_right = 559.0
+offset_bottom = 230.0
 text = "Start MatchMake"
 
 [node name="Button4" type="Button" parent="Client Test/Control"]
@@ -60,6 +60,14 @@ offset_top = 56.0
 offset_right = 523.0
 offset_bottom = 87.0
 text = "Send Peer"
+
+[node name="TextEdit" type="TextEdit" parent="Client Test/Control"]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 198.0
+offset_right = 682.0
+offset_bottom = 235.0
+text = "100"
 
 [node name="Label3" type="Label" parent="Client Test"]
 offset_left = 568.0
@@ -102,6 +110,12 @@ offset_right = 219.0
 offset_bottom = 127.0
 text = "Send Test Packet Server"
 
+[node name="Button2" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 583.0
+offset_right = 181.0
+offset_bottom = 622.0
+
 [connection signal="button_down" from="Client Test/Control/Button" to="Client Test" method="_on_button_button_down"]
 [connection signal="button_down" from="Client Test/Control/Button2" to="Client Test" method="_on_button_2_button_down"]
 [connection signal="button_down" from="Client Test/Control/Button3" to="Client Test" method="_on_button_3_button_down"]
@@ -109,3 +123,4 @@ text = "Send Test Packet Server"
 [connection signal="button_down" from="Client Test/Control/Button5" to="Client Test" method="_on_button_5_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="Button5" to="." method="_on_button_5_button_down"]
+[connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]

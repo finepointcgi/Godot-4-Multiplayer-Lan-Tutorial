@@ -18,10 +18,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://GameManager.gd"
+db="*res://SQLDBAdapeter.gd"
 
 [dotnet]
 
 project/assembly_name="multiplayer Lan Tutorial"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg")
 
 [input]
 
