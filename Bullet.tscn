@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://lviwd7iyvso6"]
 
-[ext_resource type="Script" path="res://Bullet.gd" id="1_e8ca4"]
+[ext_resource type="Script" path="res://Bullet.cs" id="1_dj016"]
 [ext_resource type="Texture2D" uid="uid://bh4xilvgu3miq" path="res://icon.svg" id="2_hjusm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3xmc"]
@@ -8,7 +8,7 @@ size = Vector2(30, 6)
 
 [node name="Node2D" type="CharacterBody2D"]
 position = Vector2(1, -1)
-script = ExtResource("1_e8ca4")
+script = ExtResource("1_dj016")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(14, 0)

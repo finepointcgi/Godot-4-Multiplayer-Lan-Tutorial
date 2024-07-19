@@ -1,9 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwld7ti0ms68j"]
+[gd_scene load_steps=20 format=3 uid="uid://dlvhl7sog8tdh"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_3us0m"]
-[ext_resource type="Texture2D" uid="uid://dld54qw3mao0w" path="res://Main Character - Male - Full spritesheet - No Guide.png" id="1_grirq"]
-[ext_resource type="Texture2D" uid="uid://tcgb3bjp6hyi" path="res://Famas.png" id="2_8kqsh"]
-[ext_resource type="PackedScene" uid="uid://lviwd7iyvso6" path="res://Bullet.tscn" id="2_gobh3"]
+[ext_resource type="Script" path="res://player.cs" id="1_6tufi"]
+[ext_resource type="Texture2D" path="res://Main Character - Male - Full spritesheet - No Guide.png" id="1_grirq"]
+[ext_resource type="Texture2D" path="res://Famas.png" id="2_8kqsh"]
+[ext_resource type="PackedScene" path="res://Bullet.tscn" id="2_gobh3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wskdl"]
 atlas = ExtResource("1_grirq")
@@ -105,26 +105,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1yx7"]
 size = Vector2(32, 40)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c85fd"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ta6c4"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = false
-properties/0/sync = false
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath("GunRotation:rotation")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/replication_mode = 1
 properties/2/path = NodePath(".:syncPos")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
-properties/3/path = NodePath(".:syncRot")
-properties/3/spawn = true
-properties/3/sync = true
-properties/3/watch = false
+properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-script = ExtResource("1_3us0m")
+script = ExtResource("1_6tufi")
 bullet = ExtResource("2_gobh3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -153,5 +146,4 @@ position = Vector2(53, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 0.1
-delta_interval = 0.1
-replication_config = SubResource("SceneReplicationConfig_c85fd")
+replication_config = SubResource("SceneReplicationConfig_ta6c4")
